@@ -26,6 +26,7 @@ import static java.util.Calendar.MINUTE;
 public class MainActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     Toast mToast;
+    Uri selectUri;
 
     private static final String BASE_PATH = Environment.getExternalStorageDirectory() + "/myapp";
     private static final String NORMAL_PATH = BASE_PATH + "/normal";
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 알람 등록
         Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("uri", selectUri.toString());
 
         long triggerTime = 0;
         long intervalTime = 24 * 60 * 60 * 1000;// 24시간
@@ -153,8 +155,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case 999:
+                case 777:
                     Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                    selectUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                     if (uri != null) {
                         String ringtonePath = uri.toString();
                         Toast.makeText(getApplicationContext(), "ringtone=" + ringtonePath, Toast.LENGTH_LONG).show();

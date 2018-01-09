@@ -20,6 +20,9 @@
         </activity>
 
         <receiver android:name=".AlarmReceiver" />
+
+        <activity android:name=".AlarmActivity"
+            android:theme="@style/PopupActivity"></activity>
     </application>
 
 </manifest>
